@@ -2,6 +2,7 @@ function Flower(_x, _y)
 {
 	this.x = _x;
 	this.y = _y;
+	this.radius = 30;
 	
 	this.red = 200;
 	this.green = 0;
@@ -19,7 +20,7 @@ function Flower(_x, _y)
 	this.draw = function()
 	{
 		fill(this.red, this.green, this.blue);
-		ellipse(this.x, this.y, 60, 60);
+		ellipse(this.x, this.y, 2 * this.radius, 2 * this.radius);
 		
 	}
 	
@@ -29,5 +30,10 @@ function Flower(_x, _y)
 		else this.x += this.speed;
 		
 	}
-
+	
+	this.shrink = function()
+	{
+		this.radius -= 2;
+	}
+	
 }

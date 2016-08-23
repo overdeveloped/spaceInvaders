@@ -30,11 +30,11 @@ function Ship()
 		
 	}
 	
-	this.move = function(_x)
+	this.move = function(_dir)
 	{
-		if (_x < 0) this.x -= this.speed;
+		if (_dir < 0) this.x -= this.speed;
 		else this.x += this.speed;
-		
+		this.midX = this.x + (this.width / 2);
 	}
 
 }

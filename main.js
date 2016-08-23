@@ -1,5 +1,5 @@
 var ship;
-var drop;
+var drops = [];
 var flowers = [];
 
 function setup()                            			 // START SETUP():
@@ -8,7 +8,7 @@ function setup()                            			 // START SETUP():
 	noStroke();
 	ship = new Ship();
 	
-	drop = new Drop(ship.midX, ship.y);
+	//drop = new Drop(ship.midX, ship.y);
 	
 	for (var x = 0; x < 6; x ++)
 	{
@@ -25,15 +25,43 @@ function draw()                               			// START DRAW():
 {
 	background(51);
 	ship.draw();
-	drop.draw();
-	drop.move();
 	
-	for (var x = 0; x < flowers.length; x ++)
+	for (var i = 0; i < drops.length; i ++)	// DROPS
+	{
+		drops[i].draw();
+		drops[i].move();
+		//if (drops[i].y < 0) drops.splice(0, 1);  // DROP LIMIT
+		
+		for (var j = 0; j < flowers.length; j ++)
+		{
+			if (drops[i].intersecting(flowers[j]))
+			{
+				flowers[j].shrink();
+				
+				drops[i].kill();
+				
+				if (flowers[j].radius == 0)
+				{
+					flowers.splice(j,1);
+				}
+			}
+		}		
+
+	}
+
+	
+	for (var x = 0; x < flowers.length; x ++) // FLOWERS
 	{
 		flowers[x].draw();
 	}
 	
-	
+	for (var i = drops.length - 1; i >= 0; i --)	// DROPS
+	{
+		if (!drops[i].exists)
+		{
+			drops.splice(i, 1);
+		}
+	}
 	
 	
 }														// END DRAW //

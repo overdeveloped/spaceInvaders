@@ -2,6 +2,9 @@ function Drop(_x, _y)
 {
 	this.x = _x;
 	this.y = _y;
+	this.radius = 10
+	
+	this.exists = true;
 	
 	this.speed = 5;
 	
@@ -12,7 +15,7 @@ function Drop(_x, _y)
 	this.draw = function()
 	{
 		fill(this.red, this.green, this.blue);
-		ellipse(this.x, this.y, 20, 20);
+		ellipse(this.x, this.y, 2 * this.radius, 2 * this.radius);
 		
 	}
 
@@ -28,5 +31,26 @@ function Drop(_x, _y)
 		this.y -= this.speed;
 		
 	}
+	
+	this.intersecting = function(object)
+	{
+		var distance = dist(this.x, this.y, object.x, object.y);
+		
+		if (distance < this.radius + object.radius)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+	
+	this.kill = function()
+	{
+		this.exists = false;
+	}
+
 
 }
