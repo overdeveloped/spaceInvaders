@@ -25,11 +25,12 @@ function draw()                               			// START DRAW():
 {
 	background(51);
 	ship.draw();
+	ship.move();
 	
 	for (var i = 0; i < drops.length; i ++)	// DROPS
 	{
 		drops[i].draw();
-		drops[i].move();
+		drops[i].move(ship.xdir);
 		//if (drops[i].y < 0) drops.splice(0, 1);  // DROP LIMIT
 		
 		for (var j = 0; j < flowers.length; j ++)
@@ -42,7 +43,7 @@ function draw()                               			// START DRAW():
 				
 				if (flowers[j].radius == 0)
 				{
-					flowers.splice(j,1);
+					flowers[j].show = false;
 				}
 			}
 		}		
@@ -52,7 +53,18 @@ function draw()                               			// START DRAW():
 	
 	for (var x = 0; x < flowers.length; x ++) // FLOWERS
 	{
-		flowers[x].draw();
+		var current = flowers[x];
+		current.draw();
+		current.moveX();
+		if (current.x > width - current.radius || current.x < current.radius) // FLOWERS MOVE
+			{
+				for (var i = 0; i < flowers.length; i ++)
+				{
+					flowers[i].changeDirX();
+					flowers[i].moveY();
+				}
+				
+			}
 	}
 	
 	for (var i = drops.length - 1; i >= 0; i --)	// DROPS

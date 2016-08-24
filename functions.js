@@ -1,4 +1,9 @@
 
+function keyReleased()
+{
+	ship.setDir(0);
+	ship.midX = ship.x + (ship.width / 2);
+}
 
 function keyPressed()
 {
@@ -19,11 +24,11 @@ function keyPressed()
 	
 	if (keyCode === RIGHT_ARROW)
 	{
-		ship.move(1);
+		ship.setDir(1);
 		
 	}
 	else if (keyCode === LEFT_ARROW)
 	{
-		ship.move(-1);
+		ship.setDir(-1);
 	}
 }

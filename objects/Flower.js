@@ -3,10 +3,16 @@ function Flower(_x, _y)
 	this.x = _x;
 	this.y = _y;
 	this.radius = 30;
+	this.speed = 1;
+	
+	this.dirX = 1;
+	this.dirY = 0;
 	
 	this.red = 200;
 	this.green = 0;
-	this.blue = 255;	
+	this.blue = 255;
+	
+	this.show = true;
 	
 	
 	this.colour = function(_red, _green, _blue)
@@ -19,16 +25,34 @@ function Flower(_x, _y)
 	
 	this.draw = function()
 	{
-		fill(this.red, this.green, this.blue);
-		ellipse(this.x, this.y, 2 * this.radius, 2 * this.radius);
+		if (this.show)
+		{
+			fill(this.red, this.green, this.blue);
+			ellipse(this.x, this.y, 2 * this.radius, 2 * this.radius);
+		}
+	}
+	
+	this.changeDirX = function()
+	{
+		this.dirX *= -1;
+	}
+	
+	this.moveX = function()
+	{
+		if (this.dirX == 1)
+		{
+			this.x += this.speed;
+		}
+		else
+		{
+			this.x -= this.speed;
+		}
 		
 	}
 	
-	this.move = function(_x)
+	this.moveY = function()
 	{
-		if (_x < 0) this.x -= this.speed;
-		else this.x += this.speed;
-		
+		this.y += 10;
 	}
 	
 	this.shrink = function()

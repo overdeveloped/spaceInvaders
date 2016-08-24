@@ -9,6 +9,7 @@ function Ship()
 	this.midY = this.y + (this.height / 2);
 	
 	this.speed = 6;
+	this.xdir = 0;
 	
 	this.red = 255;
 	this.green = 0;
@@ -30,11 +31,14 @@ function Ship()
 		
 	}
 	
-	this.move = function(_dir)
+	this.setDir = function(dir)
 	{
-		if (_dir < 0) this.x -= this.speed;
-		else this.x += this.speed;
-		this.midX = this.x + (this.width / 2);
+		this.xdir = dir;
+	}
+	
+	this.move = function(dir)
+	{
+		this.x += this.xdir * this.speed;
 	}
 
 }
